@@ -1,0 +1,87 @@
+---
+#grails:
+#    mongodb:
+#        connectionString: "mongodb://kllect_app:VQ4-QmD-TE2-CMq@ds025449.mlab.com:25449/kllect"
+
+environments:
+    development:
+        grails:
+            mongodb:
+                connectionString: "mongodb://kllect_app:VQ4-QmD-TE2-CMq@ds025449.mlab.com:25449/kllect"
+    test:
+        grails:
+            mongodb:
+                host: "54.213.43.239"
+                port: 27017
+                username:
+                password:
+                databaseName: "parser"
+    production:
+        grails:
+            mongodb:
+                host: "54.213.43.239"
+                port: 27017
+                username:
+                password:
+                databaseName: "parser"
+
+---
+---
+grails:
+    profile: rest-api
+    codegen:
+        defaultPackage: kllect2
+    spring:
+        transactionManagement:
+            proxies: false
+info:
+    app:
+        name: '@info.app.name@'
+        version: '@info.app.version@'
+        grailsVersion: '@info.app.grailsVersion@'
+spring:
+
+    groovy:
+        template:
+            check-template-location: false
+
+---
+grails:
+    mime:
+        disable:
+            accept:
+                header:
+                    userAgents:
+                        - Gecko
+                        - WebKit
+                        - Presto
+                        - Trident
+        types:
+            all: '*/*'
+            atom: application/atom+xml
+            css: text/css
+            csv: text/csv
+            form: application/x-www-form-urlencoded
+            html:
+              - text/html
+              - application/xhtml+xml
+            js: text/javascript
+            json:
+              - application/json
+              - text/json
+            multipartForm: multipart/form-data
+            rss: application/rss+xml
+            text: text/plain
+            hal:
+              - application/hal+json
+              - application/hal+xml
+            xml:
+              - text/xml
+              - application/xml
+    urlmapping:
+        cache:
+            maxsize: 1000
+    controllers:
+        defaultScope: singleton
+    converters:
+        encoding: UTF-8

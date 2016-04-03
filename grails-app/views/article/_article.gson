@@ -1,0 +1,19 @@
+import com.kllect.Article
+import org.bson.types.ObjectId
+
+model {
+    Article article
+}
+json {
+    id article.id.toString()
+    title article.title
+    siteNeme article.site_name
+    parseDate article.parse_date
+    publishDate article.publish_date
+    articleUrl article.article_url
+    articleBaseUrl article.article_base_url
+    youtubeUrl article.youtube_url
+    description article.description
+    isVideo article.is_video
+    videoSelector article.video_selector
+}

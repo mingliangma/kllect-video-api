@@ -1,0 +1,6 @@
+import com.kllect.Article
+
+model {
+    Article article
+}
+json tmpl.article(article)
