@@ -7,7 +7,7 @@ environments:
     development:
         grails:
             mongodb:
-                connectionString: "mongodb://kllect_app:VQ4-QmD-TE2-CMq@ds025449.mlab.com:25449/kllect"
+                connectionString: "mongodb://kllect_app:VQ4-QmD-TE2-CMq@ds011241.mlab.com:11241/kllect-dev"
     test:
         grails:
             mongodb:

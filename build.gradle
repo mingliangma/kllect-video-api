@@ -62,6 +62,7 @@ dependencies {
     compile "org.grails.plugins:mongodb"
     compile "org.mongodb:mongodb-driver:3.2.2"
 
+    compile 'org.jsoup:jsoup:1.9.1'
     console "org.grails:grails-console"
     profile "org.grails.profiles:rest-api:3.1.4"
     runtime "com.h2database:h2"

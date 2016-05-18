@@ -12,6 +12,12 @@ class ArticleController {
         [article: articles]
     }
 
+    def listVideoArticlesBySiteName(){
+        String siteName = params.site
+        def articles = Article.findAllBySite_name(siteName, [max: 30, sort: "parse_date", order: "desc"])
+        [article: articles]
+    }
+
     def getArticle(){
         def article = Article.get(new ObjectId(params.id))
         [article:article]
