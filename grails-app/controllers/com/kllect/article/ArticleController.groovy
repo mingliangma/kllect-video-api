@@ -18,6 +18,13 @@ class ArticleController {
         [article: articles]
     }
 
+    def listVideoByInterest(){
+        String interest = params.interest
+        println interest
+        def articles = Article.findAllByExtraction_method(interest, [max: 40, sort: "parse_date", order: "desc"])
+        [article: articles]
+    }
+
     def getArticle(){
         def article = Article.get(new ObjectId(params.id))
         [article:article]

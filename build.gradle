@@ -13,8 +13,8 @@ buildscript {
     }
 }
 
-version "0.1"
-group "kllect2"
+version "0.2"
+group "kllect"
 
 apply plugin:"eclipse"
 apply plugin:"idea"

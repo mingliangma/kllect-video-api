@@ -6,6 +6,7 @@ class UrlMappings {
 
         "/articles"(controller: 'article', action:'listVideoArticles')
         "/articles/site/$site"(controller: 'article', action:'listVideoArticlesBySiteName')
+        "/articles/interest/$interest"(controller: 'article', action:'listVideoByInterest')
         "/article/$id"(controller: 'article', action:'getArticle')
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')

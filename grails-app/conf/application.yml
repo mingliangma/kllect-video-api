@@ -19,11 +19,7 @@ environments:
     production:
         grails:
             mongodb:
-                host: "54.213.43.239"
-                port: 27017
-                username:
-                password:
-                databaseName: "parser"
+                connectionString: "mongodb://kllect_app:VQ4-QmD-TE2-CMq@ds011241.mlab.com:11241/kllect-dev"
 
 ---
 ---

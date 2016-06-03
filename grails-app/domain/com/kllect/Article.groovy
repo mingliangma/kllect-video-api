@@ -14,6 +14,8 @@ class Article {
     String description
     Boolean is_video
     String video_selector
+    String image_url
+    String extraction_method
     static constraints = {
     }
 }
