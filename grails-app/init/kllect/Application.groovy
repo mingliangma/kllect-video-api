@@ -1,4 +1,4 @@
-package kllect2
+package kllect
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration

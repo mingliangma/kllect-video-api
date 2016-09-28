@@ -1,0 +1,6 @@
+import com.kllect.Tag
+
+model {
+    List<Tag> tag = []
+}
+json tmpl.tag(tag)

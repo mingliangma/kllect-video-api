@@ -6,8 +6,9 @@ class Article {
     ObjectId id
     String title
     String site_name
-    Date parse_date
+    String parse_date
     String publish_date
+    String tagged_date
     String article_url
     String article_base_url
     String youtube_url
@@ -16,6 +17,15 @@ class Article {
     String video_selector
     String image_url
     String extraction_method
+    String category
+    String[] tags;
+
+    static mapping = {
+        article_url index:true, indexAttributes: [unique:true, dropDups:true]
+        title index:true, indexAttributes: [unique:true, dropDups:true]
+        tags index:true
+    }
+
     static constraints = {
     }
 }

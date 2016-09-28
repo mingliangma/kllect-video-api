@@ -18,4 +18,6 @@ json {
     videoSelector article.video_selector
     imageUrl article.image_url
     interest article.extraction_method
+    tags article.tags
+    category article.category
 }
