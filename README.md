@@ -1,4 +1,3 @@
-
 **API: get all tags**
 ```
 curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" "http://api.app.kllect.com/tags"
@@ -53,6 +52,9 @@ The expected result should be:
 
 
 **API: get videos by tag**
+
+API URL: http://api.app.kllect.com/articles/tag/$tagParam
+
 ```
 curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" "http://api.app.kllect.com/articles/tag/wearable_tech"
 ```
