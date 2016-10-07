@@ -20,4 +20,5 @@ json {
     interest article.extraction_method
     tags article.tags
     category article.category
+    publisher article.publisher
 }

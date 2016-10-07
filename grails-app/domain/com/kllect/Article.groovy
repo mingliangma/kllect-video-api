@@ -18,6 +18,7 @@ class Article {
     String image_url
     String extraction_method
     String category
+    String publisher
     String[] tags;
 
     static mapping = {

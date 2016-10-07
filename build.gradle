@@ -57,7 +57,8 @@ dependencies {
     compile "org.grails:grails-logging"
     compile "org.grails.plugins:cache"
 //    compile "org.hibernate:hibernate-ehcache"
-    compile "org.grails.plugins:views-json"
+    compile "org.grails.plugins:views-json:1.1.0"
+    compile "org.grails.plugins:views-json-templates:1.1.0"
 
     compile "org.grails.plugins:mongodb"
     compile "org.mongodb:mongodb-driver:3.2.2"

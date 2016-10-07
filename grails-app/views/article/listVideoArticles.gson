@@ -2,5 +2,10 @@ import com.kllect.Article
 
 model {
     List<Article> article = []
+    Integer articleCount
 }
-json tmpl.article(article)
+json {
+    hal.paginate(Article, articleCount)
+    article tmpl.article(article)
+    homepage g.link(controller:"tag", id:"drone")
+}

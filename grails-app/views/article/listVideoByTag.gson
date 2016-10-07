@@ -1,6 +1,12 @@
 import com.kllect.Article
 
 model {
-    List<Article> article = []
+    List<Article> articles = []
+    Integer articleCount
+    String nextPagePath
 }
-json tmpl.article(article)
+json {
+    articles tmpl.article(articles)
+    articleCount articleCount
+    nextPagePath nextPagePath
+}

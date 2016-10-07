@@ -8,6 +8,7 @@ environments:
         grails:
             mongodb:
                 connectionString: "mongodb://kllect_app:JM9MQWh9xwRbeKD@ds033046.mlab.com:33046/tagged-dev"
+#                connectionString: "mongodb://kllect_app:JM9MQWh9xwRbeKD@ds049456.mlab.com:49456/tagged-dev2"
     test:
         grails:
             mongodb:
