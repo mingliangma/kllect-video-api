@@ -61,85 +61,51 @@ curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" "ht
 
 The expected result should be:
 ```
-[
-  {
-    "id": "57eb31757e243f831859235f",
-    "title": "5 New Best Tech Gadgets WEARABLE DRONE & SMART DRONES Coming in 2016",
-    "siteNeme": "youtube.com",
-    "parseDate": "Tue Sep 27 22:56:53 EDT 2016",
-    "publishDate": "2016-09-23T13:49:55.000Z",
-    "articleUrl": "https://youtu.be/9o4fPJZd7N0",
-    "articleBaseUrl": null,
-    "youtubeUrl": "https://youtu.be/9o4fPJZd7N0",
-    "description": "technology\ntechnology ",
-    "isVideo": true,
-    "videoSelector": null,
-    "imageUrl": "https://i.ytimg.com/vi/9o4fPJZd7N0/mqdefault.jpg",
-    "interest": "search_wearable_technology",
-    "tags": [
-      "wearable_tech",
-      "drone"
-    ],
-    "category": "technology"
-  },
-  {
-    "id": "57eb31747e243f831859235c",
-    "title": "TOP 5   Wearable gadgets technology   late half of 2014",
-    "siteNeme": "youtube.com",
-    "parseDate": "Tue Sep 27 22:56:52 EDT 2016",
-    "publishDate": "2016-09-23T13:49:19.000Z",
-    "articleUrl": "https://youtu.be/NTU7UvsoTbg",
-    "articleBaseUrl": null,
-    "youtubeUrl": "https://youtu.be/NTU7UvsoTbg",
-    "description": "technology\ntechnology ",
-    "isVideo": true,
-    "videoSelector": null,
-    "imageUrl": "https://i.ytimg.com/vi/NTU7UvsoTbg/mqdefault.jpg",
-    "interest": "search_wearable_technology",
-    "tags": [
-      "wearable_tech"
-    ],
-    "category": "technology"
-  },
-  {
-    "id": "57eb31527e243f83185920d2",
-    "title": "Top 3 Nano Technology 2017",
-    "siteNeme": "youtube.com",
-    "parseDate": "Tue Sep 27 22:56:18 EDT 2016",
-    "publishDate": "2016-08-03T02:52:30.000Z",
-    "articleUrl": "https://youtu.be/pIVtXdYYncQ",
-    "articleBaseUrl": null,
-    "youtubeUrl": "https://youtu.be/pIVtXdYYncQ",
-    "description": "Thank You for watching, Please like and subscribe for more videos.\n\n\n\n\n\nTags:\ntechnology machines, agriculture technology machines\nultra-ever dry part 2, ultra-ever dry part iiCan You Walk on Water? (Non-Newtonian Fluid Pool, Non-Newtonian Fluid Pool, non newtonian fluid pool, Ultra Ever dry, Spray-on clothing, spray on clothes, liquipel, top nano technology, superhydrophobic, nano technology, new technology, cool technology, technology, cool science\ntechnology, new technology, inventions you didn't know existed, inventions, 5 new technology inventions you didn't know existed, new inventions, new, future hd, gadgets, amazing inventions, 5 new inventions, trixin, ksp moho, best new inventions, light saber, new technology inventions, 5 new inventions you didn't know existed, exploring mohole, mohole, moho, exploring, uranus, ksp atomic bomb, atomic bomb, nuclear bomb, ksp nuclear bomb, ksp nuclear, smartphone, kerbal space program, ksp, how technology changed our world, how has technology changed education, how technology changed our lives, technology changes everything, 5 ways technology has changed the world, how technology has changed the world for kids, technology has changed the world, technology that changed the world, new technology that will change the world, tech that has changed tha world\n\n\n\nUltra Ever dry\nSpray-on clothing\nLiquipel",
-    "isVideo": true,
-    "videoSelector": null,
-    "imageUrl": "https://i.ytimg.com/vi/pIVtXdYYncQ/mqdefault.jpg",
-    "interest": "search_nano_technology",
-    "tags": [
-      "wearable_tech",
-      "nanotech"
-    ],
-    "category": "technology"
-  },
-  {
-    "id": "57eb31547e243f83185920f8",
-    "title": "Wearable Gadgets Nanotechnology 2015  You Tube",
-    "siteNeme": "youtube.com",
-    "parseDate": "Tue Sep 27 22:56:20 EDT 2016",
-    "publishDate": "2016-09-20T21:38:07.000Z",
-    "articleUrl": "https://youtu.be/7Ul7QoHA6vk",
-    "articleBaseUrl": null,
-    "youtubeUrl": "https://youtu.be/7Ul7QoHA6vk",
-    "description": "These technology will change the human life in future.",
-    "isVideo": true,
-    "videoSelector": null,
-    "imageUrl": "https://i.ytimg.com/vi/7Ul7QoHA6vk/mqdefault.jpg",
-    "interest": "search_nano_technology",
-    "tags": [
-      "wearable_tech",
-      "nanotech"
-    ],
-    "category": "technology"
-  }
-]
+{
+  "articles": [
+    {
+      "id": "57ec39b81db9d900633b6b2c",
+      "title": "internet of things in business intelligence",
+      "siteNeme": "youtube.com",
+      "parseDate": "Wed Sep 28 21:44:24 UTC 2016",
+      "publishDate": "2016-09-26T12:07:06.000Z",
+      "articleUrl": "https://youtu.be/VcR7fKyhbG4",
+      "articleBaseUrl": null,
+      "youtubeUrl": "https://youtu.be/VcR7fKyhbG4",
+      "description": "A small presentation on internet of things in ...",
+      "isVideo": true,
+      "videoSelector": null,
+      "imageUrl": "https://i.ytimg.com/vi/VcR7fKyhbG4/mqdefault.jpg",
+      "interest": "search_internet_of_things",
+      "tags": [
+        "internet_of_things",
+        "artificial_intelligence"
+      ],
+      "category": "technology",
+      "publisher": null
+    },
+    {
+      "id": "57ec257e1db9d9003f4a1c62",
+      "title": "Invasion of Artificial Intelligence",
+      "siteNeme": "youtube.com",
+      "parseDate": "Wed Sep 28 20:18:06 UTC 2016",
+      "publishDate": "2016-09-13T05:44:48.000Z",
+      "articleUrl": "https://youtu.be/Z5NKkfkuI-c",
+      "articleBaseUrl": null,
+      "youtubeUrl": "https://youtu.be/Z5NKkfkuI-c",
+      "description": "A fun but not so light-hearted look at the invasion of...",
+      "isVideo": true,
+      "videoSelector": null,
+      "imageUrl": "https://i.ytimg.com/vi/Z5NKkfkuI-c/mqdefault.jpg",
+      "interest": "search_artificial_intelligence",
+      "tags": [
+        "artificial_intelligence"
+      ],
+      "category": "technology",
+      "publisher": null
+    }
+  ],
+  "articleCount": 10,
+  "nextPagePath": "articles/tag/artificial_intelligence?offset=10"
+}
 ```
