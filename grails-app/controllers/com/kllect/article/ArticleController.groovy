@@ -30,7 +30,7 @@ class ArticleController {
 
     def listVideoByTag(){
         String tag = params.tag
-        params.sort = "tagged_date"
+        params.sort = "publish_date"
         params.order = "desc"
         params.max = Math.min(params.max ?params.max.toInteger(): 10, 100)
         def articles = Article.findAllByTags(tag, params)

@@ -10,6 +10,7 @@ json {
     siteNeme article.site_name
     parseDate article.parse_date
     publishDate article.publish_date
+    taggedDate article.tagged_date
     articleUrl article.article_url
     articleBaseUrl article.article_base_url
     youtubeUrl article.youtube_url
@@ -21,4 +22,5 @@ json {
     tags article.tags
     category article.category
     publisher article.publisher
+    duration article.duration
 }

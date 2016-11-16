@@ -6,9 +6,9 @@ class Article {
     ObjectId id
     String title
     String site_name
-    String parse_date
-    String publish_date
-    String tagged_date
+    Date parse_date
+    Date publish_date
+    Date tagged_date
     String article_url
     String article_base_url
     String youtube_url
@@ -19,6 +19,7 @@ class Article {
     String extraction_method
     String category
     String publisher
+    int duration
     String[] tags;
 
     static mapping = {

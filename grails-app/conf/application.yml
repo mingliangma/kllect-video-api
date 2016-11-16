@@ -16,7 +16,7 @@ environments:
     production:
         grails:
             mongodb:
-                connectionString: "mongodb://kllect_app:JM9MQWh9xwRbeKD@ds033046.mlab.com:33046/tagged-dev"
+                connectionString: '${JDBC_CONNECTION_STRING}'
 
 ---
 ---
