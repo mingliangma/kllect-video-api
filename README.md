@@ -64,45 +64,48 @@ The expected result should be:
 {
   "articles": [
     {
-      "id": "57ec39b81db9d900633b6b2c",
-      "title": "internet of things in business intelligence",
-      "siteNeme": "youtube.com",
-      "parseDate": "Wed Sep 28 21:44:24 UTC 2016",
-      "publishDate": "2016-09-26T12:07:06.000Z",
-      "articleUrl": "https://youtu.be/VcR7fKyhbG4",
-      "articleBaseUrl": null,
-      "youtubeUrl": "https://youtu.be/VcR7fKyhbG4",
-      "description": "A small presentation on internet of things in ...",
-      "isVideo": true,
-      "videoSelector": null,
-      "imageUrl": "https://i.ytimg.com/vi/VcR7fKyhbG4/mqdefault.jpg",
-      "interest": "search_internet_of_things",
-      "tags": [
-        "internet_of_things",
-        "artificial_intelligence"
-      ],
-      "category": "technology",
-      "publisher": null
+          "id": "582b6966520fea06fb9783ea",
+          "title": "The Birth of Emotional Intelligence in India | Sneh Vaswani | TEDxCRCE",
+          "siteNeme": "youtube.com",
+          "parseDate": "2016-11-15T20:00:38Z",
+          "publishDate": "2016-11-15T19:37:39Z",
+          "taggedDate": "2016-11-15T20:01:13Z",
+          "articleUrl": "https://youtu.be/1enO9bD514g",
+          "articleBaseUrl": null,
+          "youtubeUrl": "https://youtu.be/1enO9bD514g",
+          "description": "The friends we have are more than just the people we interact with...",
+          "isVideo": true,
+          "videoSelector": null,
+          "imageUrl": "https://i.ytimg.com/vi/1enO9bD514g/mqdefault.jpg",
+          "interest": "youtube_channel",
+          "tags": [
+            "artificial_intelligence"
+          ],
+          "category": "technology",
+          "publisher": "TEDx Talks",
+          "duration": 837
     },
     {
-      "id": "57ec257e1db9d9003f4a1c62",
-      "title": "Invasion of Artificial Intelligence",
+      "id": "582b312d520fea06c99c007b",
+      "title": "Healthcare as an information business | Udi Manber | TEDxSanFrancisco",
       "siteNeme": "youtube.com",
-      "parseDate": "Wed Sep 28 20:18:06 UTC 2016",
-      "publishDate": "2016-09-13T05:44:48.000Z",
-      "articleUrl": "https://youtu.be/Z5NKkfkuI-c",
+      "parseDate": "2016-11-15T16:00:45Z",
+      "publishDate": "2016-11-15T15:48:50Z",
+      "taggedDate": "2016-11-15T16:01:17Z",
+      "articleUrl": "https://youtu.be/V6Ksz1zOCSU",
       "articleBaseUrl": null,
-      "youtubeUrl": "https://youtu.be/Z5NKkfkuI-c",
-      "description": "A fun but not so light-hearted look at the invasion of...",
+      "youtubeUrl": "https://youtu.be/V6Ksz1zOCSU",
+      "description": "Udi knows everything about \"Search\" and how information gets taped to create and improve intelligent systems. In his talk he shares how we need to access and open the data in order to create an \"smart\" and \"efficient\" system for healthcare and patients. \n\nUdi Manber is a computer scientist known for his work on search, He is also one of the authors of agrep and GLIMPSE.\r\n Udi hold a master degree in mathematics and a PhD in computer sciences. He started to develop search software in the late 80s when nearly no one was interested, but he was patient enough to wait 10 years when it finally paid off in a big way. He joined Amazon as Chief Algorithm officer in 2002, lead the search groups at Yahoo, Google and Youtube.\r\nIn 2015 he left Google to join the National Institutes of Health, where he is trying to use his expertise to improve access to medical knowledge.\n\nThis talk was given at a TEDx event using the TED conference format but independently organized by a local community. Learn more at http://ted.com/tedx",
       "isVideo": true,
       "videoSelector": null,
-      "imageUrl": "https://i.ytimg.com/vi/Z5NKkfkuI-c/mqdefault.jpg",
-      "interest": "search_artificial_intelligence",
+      "imageUrl": "https://i.ytimg.com/vi/V6Ksz1zOCSU/mqdefault.jpg",
+      "interest": "youtube_channel",
       "tags": [
         "artificial_intelligence"
       ],
       "category": "technology",
-      "publisher": null
+      "publisher": "TEDx Talks",
+      "duration": 904
     }
   ],
   "articleCount": 10,
