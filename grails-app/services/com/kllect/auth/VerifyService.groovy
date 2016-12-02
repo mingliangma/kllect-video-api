@@ -92,6 +92,7 @@ class VerifyService {
 
     private JWTHeader decodeAndParseHeader(String b64String) throws IOException, DecoderException {
         Gson gson = new Gson();
+        String decodedHeader = decodeAndParse(b64String);
         return gson.fromJson(decodeAndParse(b64String), JWTHeader.class);
     }
 
@@ -128,14 +129,14 @@ class VerifyService {
         if(token != null && !"".equals(token)) {
             String[] pieces = token.split("\\.");
             if(pieces.length != 3) {
-                throw new IllegalStateException("Wrong number of segments: " + pieces.length);
+                throw new IllegalStateException("Wrong number of segments: " + pieces.length)
             } else {
                 JWTHeader jwtHeader = decodeAndParseHeader(pieces[0]);
                 JWTPayload jwtPayload = decodeAndParsePayload(pieces[1]);
                 return new JWTHeaderAndPayload(jwtHeader, jwtPayload);
             }
         } else {
-            throw new IllegalStateException("token not set");
+            throw new IllegalStateException("token not set")
         }
     }
 }

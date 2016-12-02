@@ -1,8 +1,8 @@
 package com.kllect.user
 
+import com.google.gson.JsonSyntaxException
 import com.kllect.auth.JWTPayload
-import grails.rest.*
-import grails.converters.*
+import org.springframework.validation.Errors
 
 class InterestController {
 
@@ -12,12 +12,17 @@ class InterestController {
         JWTPayload jwtPayload;
         try {
             jwtPayload = verifyService.verifyToken(token)
-        }catch (Exception e){
-            log.error(e.message)
+        }catch(JsonSyntaxException e){
+            log.error("JsonSyntaxException: "+e.message)
             response.status= 400
-            Map resp = [message: e.message]
+            render(view:'authFailed', model:[error: "Token is corrupted"])
+            return
+        }catch (Exception e){
+            log.error("JsonSyntaxException: "+e.message)
+            response.status= 401
+            render(view:'authFailed', model:[error: e.getMessage()])
+            return
         }
-
 
 
     }
