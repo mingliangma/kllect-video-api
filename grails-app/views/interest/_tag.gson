@@ -1,0 +1,9 @@
+import com.kllect.Topic
+
+model {
+    Topic topic
+}
+json {
+    topic topic.name
+    id topic.id.toString()
+}

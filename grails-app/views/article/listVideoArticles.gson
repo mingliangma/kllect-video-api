@@ -7,5 +7,5 @@ model {
 json {
     hal.paginate(Article, articleCount)
     article tmpl.article(article)
-    homepage g.link(controller:"tag", id:"drone")
+    homepage g.link(controller:"topic", id:"drone")
 }

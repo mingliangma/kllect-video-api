@@ -1,0 +1,6 @@
+import com.kllect.Topic
+
+model {
+    List<Topic> topic = []
+}
+json tmpl.topic(topic)

@@ -1,62 +1,111 @@
-**API: get all tags**
+**API: get all topics**
+
+GET URL: http://api.app.kllect.com/topics
+
 ```
-curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" "http://api.app.kllect.com/tags"
+curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" "http://api.app.kllect.com/topics"
 ```
 The expected result should be:
 ```
 [
   {
-    "tagName": "artificial_intelligence"
-  },
-  {
-    "tagName": "battery"
-  },
-  {
-    "tagName": "biotech"
-  },
-  {
-    "tagName": "driverless_cars"
-  },
-  {
-    "tagName": "drone"
-  },
-  {
-    "tagName": "ecommerce"
-  },
-  {
-    "tagName": "internet_of_things"
-  },
-  {
-    "tagName": "manufacturing"
-  },
-  {
-    "tagName": "nanotech"
-  },
-  {
-    "tagName": "others"
-  },
-  {
-    "tagName": "smartphones"
-  },
-  {
-    "tagName": "social_networks"
-  },
-  {
-    "tagName": "virtual_reality_and_augmented_reality"
-  },
-  {
-    "tagName": "wearable_tech"
-  }
+      "topic": "artificial_intelligence",
+      "id": "57fee9bc04e539e9b2141aa8"
+    },
+    {
+      "topic": "driverless_cars",
+      "id": "57fee9bc04e539e9b2141aa9"
+    },
+    {
+      "topic": "drone",
+      "id": "57fee9bc04e539e9b2141aaa"
+    },
+    {
+      "topic": "ecommerce",
+      "id": "57fee9bc04e539e9b2141aab"
+    }
 ]
 ```
 
+**API: Store user interests**
 
-**API: get videos by tag**
+POST URL: http://api.app.kllect.com/topics
 
-API URL: http://api.app.kllect.com/articles/tag/$tagParam
+Request Body:
+```
+{
+    token:  "eyJasdf.fdasdfedf.M7OGrZrawM",
+	topicIds: ["57fee9bc04e539e9b2141aab", "57fee9bc04e539e9b2141aaa"]
+}
+```
+
+Reponse Body - Successful:
+    
+    response status: 200
+```
+{
+  "message": "successful"
+}
+```
+
+Reponse Body - Token expired:
+    
+    response status: 401
+```
+{
+  "message": "jwt expired"
+}
+```
+
+Reponse Body - Bad token:
+    
+    response status: 400
+```
+{
+  "message": "Token is corrupted"
+}
+```
+
+**API: Store video topic relevancy**
+
+POST URL: http://api.app.kllect.com/article/$articleId/relevancy?topic=($topicName)?isRelevant=(true or false)
+
+Request Body:
+```
+{
+    token:  "eyJasdf.fdasdfedf.M7OGrZrawM"
+}
+```
+
 
 ```
-curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" "http://api.app.kllect.com/articles/tag/wearable_tech"
+curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d '	{token:eyJasdf.fdasdfedf.M7OGrZrawM}' "http://localhost:8080/article/581fffeadea4597b6104d3a7/relevancy?topic=drone&isRelevant=false"
+```
+
+Reponse Body - Successful:
+    
+    response status: 200
+```
+{
+  "message": "successful"
+}
+```
+
+Reponse Body - Fail: 
+    
+    response status: 401
+```
+{
+  "message": "invalid article id"
+}
+```
+
+**API: get videos by topic**
+
+GET URL: http://api.app.kllect.com/articles/topic/$topicParam
+
+```
+curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" "http://api.app.kllect.com/articles/topic/wearable_tech"
 ```
 
 The expected result should be:
