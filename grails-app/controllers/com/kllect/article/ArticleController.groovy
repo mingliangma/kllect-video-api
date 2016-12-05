@@ -39,6 +39,12 @@ class ArticleController {
         [articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath]
     }
 
+    def listVideoByRecommending(){
+        params.tag = "others"
+        def response = listVideoByTag()
+        render(view:'listVideoByTag', model:response)
+    }
+
     def index(Integer max){
         params.max = Math.min(max ?: 10, 100)
         respond Article.list(params), model:[articleCount: Article.count()]
