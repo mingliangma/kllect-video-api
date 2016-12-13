@@ -1,0 +1,11 @@
+version: 0.1
+
+phases:
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - grails prod war
+artifacts:
+  files:
+    - build/libs/Kllect_production.war
+  discard-paths: yes
