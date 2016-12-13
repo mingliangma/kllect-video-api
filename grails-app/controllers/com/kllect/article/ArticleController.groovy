@@ -85,7 +85,7 @@ class ArticleController {
                 log.error(it)
             }
         }
-        render(view:'../success')
+        render(view:'success')
     }
 
 

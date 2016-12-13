@@ -1,9 +1,0 @@
-import com.kllect.Tag
-import org.bson.types.ObjectId
-
-model {
-    Tag tag
-}
-json {
-    tagName tag.name
-}

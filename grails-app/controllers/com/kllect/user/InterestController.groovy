@@ -41,9 +41,10 @@ class InterestController {
     }
 
 
-    def listAllTags() {
+    def listAllTopics() {
         def topics = Topic.findAll()
-        [topic: topics]
+        [topics: topics]
+
     }
 
     private User saveNewUser(JWTPayload jwtPayload) {

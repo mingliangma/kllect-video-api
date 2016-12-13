@@ -1,3 +1,5 @@
+package article
+
 json {
     message "successful"
 }
