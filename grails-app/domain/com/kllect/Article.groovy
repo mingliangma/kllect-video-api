@@ -29,5 +29,7 @@ class Article {
     }
 
     static constraints = {
+        video_selector nullable: true
+        article_base_url nullable: true
     }
 }

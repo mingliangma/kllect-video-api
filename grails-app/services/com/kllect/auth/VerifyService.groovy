@@ -126,7 +126,7 @@ class VerifyService {
     }
 
     private JWTHeaderAndPayload decode(String token) throws IOException, DecoderException {
-        if(token != null && !"".equals(token)) {
+        if(token != null && "" != token) {
             String[] pieces = token.split("\\.");
             if(pieces.length != 3) {
                 throw new IllegalStateException("Wrong number of segments: " + pieces.length)

@@ -77,6 +77,8 @@ dependencies {
     //JSON to Object conversion
     compile 'com.google.code.gson:gson:2.8.0'
 
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+
     console "org.grails:grails-console"
     profile "org.grails.profiles:rest-api:3.1.4"
     testCompile "org.grails:grails-plugin-testing"

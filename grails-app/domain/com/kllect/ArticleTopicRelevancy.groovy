@@ -14,5 +14,7 @@ class ArticleTopicRelevancy {
 
     ObjectId userId
 
+    Date updated_at
+
     boolean isRelevant
 }

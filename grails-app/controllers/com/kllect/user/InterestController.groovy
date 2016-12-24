@@ -1,6 +1,7 @@
 package com.kllect.user
 
 import com.google.gson.JsonSyntaxException
+import com.kllect.DateUtil
 import com.kllect.User
 import com.kllect.auth.JWTPayload
 import com.kllect.Topic
@@ -13,12 +14,12 @@ class InterestController {
     def saveUserInterests() {
         String token = request.JSON.token
         def topicIds = request.JSON.topicIds
-
-        log.info("Token: "+token)
-        log.info("topicIds: "+topicIds)
+        String birthdate = request.JSON.birthdate
 
         println "Token: "+token
         println "topicIds: "+topicIds
+        println "birthdate: "+birthdate
+        println "request.JSON: "+request.JSON
 
         JWTPayload jwtPayload;
         try {
@@ -35,7 +36,13 @@ class InterestController {
             return
         }
 
-        User u = saveNewUser(jwtPayload)
+        User u
+
+        if(birthdate) {
+            u  = saveNewUser(jwtPayload, DateUtil.parseStringToDate(birthdate))
+        }else{
+            u  = saveNewUser(jwtPayload)
+        }
         try {
             saveInterests(topicIds, u)
         }catch (InvalidUserInputException e){
@@ -43,7 +50,7 @@ class InterestController {
                 response.status= 400
                 render(view:'authFailed', model:[error: e.getMessage()])
                 return
-            }
+        }
         if (!u.save(flush: true)) {
             u.errors.allErrors.each {
                 log.error(it)
@@ -59,11 +66,15 @@ class InterestController {
     }
 
     private User saveNewUser(JWTPayload jwtPayload) {
+        return saveNewUser(jwtPayload, null)
+    }
+
+    private User saveNewUser(JWTPayload jwtPayload, Date birthdate) {
         User u = User.findByUid(jwtPayload.user_id)
         if (u == null) {
-            u = new User(email: jwtPayload.email, uid: jwtPayload.user_id)
+            u = new User(email: jwtPayload.email, uid: jwtPayload.user_id, birthdate:birthdate)
         }
-        u
+        return u
     }
 
     private void saveInterests(interests, User u) {

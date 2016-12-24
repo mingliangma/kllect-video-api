@@ -7,6 +7,7 @@ import com.kllect.Topic
 import com.kllect.User
 import com.kllect.auth.JWTPayload
 import com.kllect.auth.KllectError
+import org.apache.commons.lang3.ArrayUtils
 import org.bson.types.ObjectId
 
 class ArticleController {
@@ -51,6 +52,8 @@ class ArticleController {
     }
 
     def setArticleRelevancy(){
+        println "setArticleRelevancy() starts..."
+        println "token"
         String token = request.JSON.token
         def validation = relevancyArticleValidation(params, token)
 
@@ -58,6 +61,10 @@ class ArticleController {
         String topicName = params.topic
         String isRelevant = params.isRelevant
 
+        println "token: "+token
+        println "articleId: "+articleId
+        println "topicName: "+topicName
+        println "isRelevant: "+isRelevant
 
         JWTPayload jwtPayload
         if (validation instanceof KllectError){
@@ -78,11 +85,36 @@ class ArticleController {
                 topicId: topic.id,
                 topicName: topic.name,
                 userId: user.id,
-                isRelevant: isRelevant == "true"
+                isRelevant: isRelevant == "true",
+                updated_at: new Date()
         )
         if (!rel.save(flush: true)) {
             rel.errors.allErrors.each {
                 log.error(it)
+                response.status=500
+                render(view:'error', model:[error: it])
+                return
+            }
+        }
+
+        if(user.email == "mingliang.ma@gmail.com"){
+            if (isRelevant == "false"){
+                boolean isRemoved = false;
+                for(int i; i<article.tags.length; i++){
+                    if (article.tags[i] == topicName){
+                        if(article.tags.length <=1){
+                            article.tags[i] = "others"
+                        }else{
+                            ArrayUtils.removeElement(article.tags, topicName)
+                        }
+                        article.markDirty("tags")
+                        if (!article.save(flush: true)) {
+                            article.errors.allErrors.each {
+                                log.error(it)
+                            }
+                        }
+                    }
+                }
             }
         }
         render(view:'success')
