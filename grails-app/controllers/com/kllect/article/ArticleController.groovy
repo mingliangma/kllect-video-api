@@ -31,19 +31,72 @@ class ArticleController {
 
     def listVideoByTag(){
         String tag = params.tag
-        params.sort = "publish_date"
-        params.order = "desc"
-        params.max = Math.min(params.max ?params.max.toInteger(): 10, 100)
-        def articles = Article.findAllByTags(tag, params)
-        int offset = params.offset!=null?params.offset.toInteger()+params.max.toInteger():params.max.toInteger()
+        Map findParams = setParams()
+
+        def articles = Article.findAllByTags(tag, findParams)
+        int offset = findParams.offset + findParams.max
         String nextPagePath = "articles/topic/"+tag+"?offset="+offset
         [articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath]
     }
 
+    private Map setParams() {
+        String sort = "publish_date"
+        String order = "desc"
+        int max = Math.min(params.max ? params.max.toInteger() : 10, 100)
+        int offset = params.offset?params.offset.toInteger():0
+
+        return [sort: sort, order: order, max:max, offset:offset]
+    }
+
     def listVideoByRecommending(){
-        params.tag = "others"
-        def response = listVideoByTag()
-        render(view:'listVideoByTag', model:response)
+
+        String uid = params.uid
+
+        def validation = recommendingArticleValidation(params)
+        if (validation instanceof KllectError){
+            KllectError error = (KllectError) validation
+            response.status= error.httpStatus
+            render(view:'error', model:[error: error.message])
+            return
+        }
+
+        User user = User.findByUid(uid)
+
+        List<String> tags = getInterestNamesFromUser(user)
+        Map findParams = setParams()
+
+        List<Article> articles = Article.findAllByTagsInList(tags, findParams)
+        countTags(articles)
+
+        int offset = findParams.offset + findParams.max
+        String nextPagePath = "articles/recommending?offset="+offset+"&uid="+uid
+
+        render(view:'listVideoByTag', model:[articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath])
+    }
+
+    List<String> getInterestNamesFromUser(User user){
+        List<String> topics = new ArrayList<String>()
+        for (Topic topic: user.interests){
+            println "topics: "+topic.name
+            topics.add(topic.name)
+        }
+        return topics
+    }
+
+    void countTags(List<Article> articles){
+        Map c = [:]
+        for (Article a: articles){
+
+            for (String t: a.tags){
+                if (c.containsKey(t)){
+                    int count = c.get(t)
+                    c.put(t, count+1)
+                }else{
+                    c.put(t, 1)
+                }
+            }
+        }
+        c.each{ k, v -> println "${k}:${v}" }
     }
 
     def index(Integer max){
@@ -118,6 +171,17 @@ class ArticleController {
             }
         }
         render(view:'success')
+    }
+
+    def recommendingArticleValidation(params){
+        if (params.uid == null){
+            return new KllectError("firebase uid not exist", "", 400)
+        }
+
+        User user = User.findByUid(params.uid)
+        if (user == null){
+            return new KllectError("The user does not exists", "", 401)
+        }
     }
 
 
