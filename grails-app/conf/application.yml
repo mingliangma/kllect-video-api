@@ -7,16 +7,15 @@ environments:
     development:
         grails:
             mongodb:
-                connectionString: "mongodb://kllect_app:JM9MQWh9xwRbeKD@ds033046.mlab.com:33046/tagged-dev"
-#                connectionString: "mongodb://kllect_app:JM9MQWh9xwRbeKD@ds049456.mlab.com:49456/tagged-dev2"
+                connectionString: "mongodb://kllect_app:JM9MQWh9xwRbeKD@ds049456.mlab.com:49456/tagged-dev2"
     test:
         grails:
             mongodb:
-                connectionString: "mongodb://kllect_app:JM9MQWh9xwRbeKD@ds033046.mlab.com:33046/tagged-dev"
+                connectionString: "mongodb://kllect_app:JM9MQWh9xwRbeKD@ds049456.mlab.com:49456/tagged-dev2"
     production:
         grails:
             mongodb:
-                connectionString: '${JDBC_CONNECTION_STRING}'
+                connectionString: "mongodb://kllect_app:dT3aC7VChChmin@ds127079-a0.mlab.com:27079,ds127079-a1.mlab.com:27079/kllect-prod?replicaSet=rs-ds127079"
 
 ---
 ---
