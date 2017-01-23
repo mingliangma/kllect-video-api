@@ -12,7 +12,7 @@ class UrlMappings {
         "/article/$id"(controller: 'article', action:'getArticle')
         "/article/$id/relevancy"(controller: 'article', action:'setArticleRelevancy')
         "/topics"(controller: 'interest'){
-            action = [GET:"listAllTopics", POST:"saveUserInterests"]
+            action = [GET:"listAllTopics", POST:"saveUserInterests", PUT:"updateUserInterests"]
         }
 
         "/"(controller: 'application', action:'index')

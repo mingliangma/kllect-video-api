@@ -21,40 +21,71 @@ class InterestController {
         println "birthdate: "+birthdate
         println "request.JSON: "+request.JSON
 
-        JWTPayload jwtPayload;
+        JWTPayload jwtPayload
         try {
             jwtPayload = verifyService.verifyToken(token)
+
+            User u = User.findByUid(jwtPayload.user_id)
+            if (!u) {
+                if (birthdate) {
+                    u = saveNewUser(jwtPayload, DateUtil.parseStringToDate(birthdate))
+                } else {
+                    u = saveNewUser(jwtPayload)
+                }
+            }
+
+            addUserInterests(u, topicIds)
+            u.save(flush: true)
+            render(view:'saveUserInterests')
         }catch(JsonSyntaxException e){
             log.error("JsonSyntaxException: "+e.message)
             response.status= 400
             render(view:'authFailed', model:[error: "Token is corrupted"])
-            return
+        }catch (InvalidUserInputException e){
+            log.error("InvalidUserInputException: "+e.message)
+            response.status= 400
+            render(view:'authFailed', model:[error: e.getMessage()])
         }catch (Exception e){
             log.error("JsonSyntaxException: "+e.message)
             response.status= 401
             render(view:'authFailed', model:[error: e.getMessage()])
-            return
         }
+    }
 
-        User u
+    def updateUserInterests(){
 
-        if(birthdate) {
-            u  = saveNewUser(jwtPayload, DateUtil.parseStringToDate(birthdate))
-        }else{
-            u  = saveNewUser(jwtPayload)
-        }
+        String token = request.JSON.token
+        List<String> topicIds = request.JSON.topicIds
+
+        JWTPayload jwtPayload
         try {
-            saveInterests(topicIds, u)
-        }catch (InvalidUserInputException e){
-                log.error("InvalidUserInputException: "+e.message)
-                response.status= 400
-                render(view:'authFailed', model:[error: e.getMessage()])
-                return
-        }
-        if (!u.save(flush: true)) {
-            u.errors.allErrors.each {
-                log.error(it)
+            jwtPayload = verifyService.verifyToken(token)
+
+            validateTopicIds(topicIds)
+
+            User u = User.findByUid(jwtPayload.user_id)
+
+            if (u == null){
+                throw new NoUserFoundException("uid not found: "+jwtPayload.user_id)
             }
+
+            removeUserInterests(u, topicIds)
+            addUserInterests(u, topicIds)
+
+            u.save(flush: true)
+            render(view:'updateUserInterests')
+        }catch(JsonSyntaxException e){
+            log.error("JsonSyntaxException: "+e.message)
+            response.status= 400
+            render(view:'authFailed', model:[error: "Token is corrupted"])
+        }catch (InvalidUserInputException e){
+            log.error("InvalidUserInputException: "+e.message)
+            response.status= 400
+            render(view:'authFailed', model:[error: "InvalidUserInputException: "+e.getMessage()])
+        }catch (Exception e){
+            log.error("JsonSyntaxException: "+e.message)
+            response.status= 401
+            render(view:'authFailed', model:[error: e.getMessage()])
         }
     }
 
@@ -63,6 +94,15 @@ class InterestController {
         def topics = Topic.findAll()
         [topics: topics]
 
+    }
+
+    private boolean validateTopicIds(topicIds){
+        for (String topicId: topicIds) {
+            if (!ObjectId.isValid(topicId)) {
+                throw new InvalidUserInputException("invalid topic ID: "+topicId)
+            }
+        }
+        return true
     }
 
     private User saveNewUser(JWTPayload jwtPayload) {
@@ -77,23 +117,42 @@ class InterestController {
         return u
     }
 
-    private void saveInterests(interests, User u) {
+    private void addUserInterests(User u, interests) {
         for (String topic : interests) {
 
-            if (ObjectId.isValid(topic)) {
-                log.info( "topic: " + topic)
-                Topic t = Topic.get(new ObjectId(topic))
-                if (t == null) {
-                    log.error("Topic does not exist")
-                    throw new InvalidUserInputException("Topic "+topic+" does not exist")
-                } else {
-                    if (hasUserSelectedTopic(u, t)) {
-                        continue
-                    }
-                }
+            Topic t = Topic.get(new ObjectId(topic))
+            if (t&&!hasUserSelectedTopic(u, t)) {
                 u.addToInterests(t)
-            }else{
-                throw new InvalidUserInputException("Invalid topic Id ");
+            }
+        }
+    }
+
+
+    private void removeUserInterests(User u, List<String> topicIds) {
+        List<String> userTopicsId = new ArrayList<>()
+        List<Topic> topicsToBeRemoved = new ArrayList<>()
+        for (Topic topic : u.interests) {
+
+            if (topicIds.contains(topic.id.toString())) {
+                userTopicsId.add(topic.id.toString())
+            } else {
+                topicsToBeRemoved.add(topic)
+            }
+        }
+
+        for (Topic topic : topicsToBeRemoved) {
+            u.removeFromInterests(topic)
+
+            for (User user : topic.users) {
+                if (user.id == u.id) {
+                    topic.removeFromUsers(user)
+                    if (!topic.save(flush: true)) {
+                        topic.errors.allErrors.each {
+                            log.error(it)
+                        }
+                    }
+                    break
+                }
             }
         }
     }
