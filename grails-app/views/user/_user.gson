@@ -1,0 +1,10 @@
+import com.kllect.User
+
+model {
+    User user
+}
+json {
+    uid user.uid
+    email user.email
+    interests user.interests
+}

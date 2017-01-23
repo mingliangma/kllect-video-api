@@ -1,0 +1,11 @@
+import com.kllect.User
+
+model {
+    User user
+}
+
+json {
+    interests tmpl.'/interest/topic'(user.interests)
+    uid user.uid
+    email user.email
+}
