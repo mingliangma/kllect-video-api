@@ -15,7 +15,8 @@ environments:
     production:
         grails:
             mongodb:
-                connectionString: "mongodb://kllect_app:dT3aC7VChChmin@ds127079-a0.mlab.com:27079,ds127079-a1.mlab.com:27079/kllect-prod?replicaSet=rs-ds127079"
+                connectionString: '${JDBC_CONNECTION_STRING}'
+
 
 ---
 ---
