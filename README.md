@@ -27,6 +27,38 @@ The expected result should be:
 ]
 ```
 
+**API: get user profile**
+
+GET URL: http://api.app.kllect.com/user/$uid
+
+```
+curl -X GET -H "Content-Type: application/json" -H "Cache-Control: no-cache" "http://api.app.kllect.com/user/nglCQxu1eaYtDcr5HfZRRB4WKUm1"
+```
+The expected result should be:
+```
+{
+  "interests": [
+    {
+      "topic": "drone",
+      "displayName": "Drone",
+      "id": "5884dc5160abc42ea1c64e16"
+    },
+    {
+      "topic": "others",
+      "displayName": "Others",
+      "id": "5884dc5160abc42ea1c64e18"
+    },
+    {
+      "topic": "internet_of_things",
+      "displayName": "Internet Of Things",
+      "id": "5884dc5160abc42ea1c64e17"
+    }
+  ],
+  "uid": "nglCQxu1eaYtDcr5HfZRRB4WKUm1",
+  "email": "mingliang.ma@hotmail.com"
+}
+```
+
 **API: Store user interests**
 
 POST URL: http://api.app.kllect.com/topics
@@ -63,6 +95,27 @@ Reponse Body - Bad token:
 ```
 {
   "message": "Token is corrupted"
+}
+```
+
+**API: update user interests**
+
+PUT URL: http://api.app.kllect.com/topics
+
+Request Body:
+```
+{
+    token:  "eyJasdf.fdasdfedf.M7OGrZrawM",
+	topicIds: ["57fee9bc04e539e9b2141aab", "57fee9bc04e539e9b2141aaa"]
+}
+```
+
+Reponse Body - Successful:
+
+    response status: 200
+```
+{
+  "message": "successful"
 }
 ```
 
