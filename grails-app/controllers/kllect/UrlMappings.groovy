@@ -14,7 +14,9 @@ class UrlMappings {
         "/topics"(controller: 'interest'){
             action = [GET:"listAllTopics", POST:"saveUserInterests", PUT:"updateUserInterests"]
         }
-        "/user/$uid"(controller: 'user', action:'getUserProfile')
+        "/user/$uid"(controller: 'user') {
+            action = [GET: "getUserProfile", POST: "saveUserProfile"]
+        }
 
 
         "/"(controller: 'application', action:'index')

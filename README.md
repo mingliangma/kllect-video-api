@@ -59,6 +59,54 @@ The expected result should be:
 }
 ```
 
+**API: save/update user profile**
+
+POST URL: http://api.app.kllect.com/user/$uid
+
+Request Body:
+```
+{
+    token:  "eyJhbGciO.eyJpc3MiOiJodHRwc.zZu_yc8CcftjTzZZEo8HPBQ",
+    name: "Mingliang Ma",
+    gender: "male",
+    profilePicUrl:"http://...",
+    city: "Toronto",
+    country: "Canada",
+    birthdate: ""
+}
+```
+
+The expected result should be:
+```
+{
+  "interests": [
+    {
+      "topic": "drone",
+      "displayName": "Drone",
+      "id": "5884dc5160abc42ea1c64e16"
+    },
+    {
+      "topic": "others",
+      "displayName": "Others",
+      "id": "5884dc5160abc42ea1c64e18"
+    },
+    {
+      "topic": "internet_of_things",
+      "displayName": "Internet Of Things",
+      "id": "5884dc5160abc42ea1c64e17"
+    }
+  ],
+  "uid": "nglCQxu1eaYtDcr5HfZRRB4WKUm1",
+  "email": "mingliang.ma@hotmail.com"
+  "name": "Mingliang Ma",
+  "gender": "male",
+  "profilePicUrl":"http://...",
+  "city": "Toronto",
+  "country": "Canada",
+  "birthdate": ""
+}
+```
+
 **API: Store user interests**
 
 POST URL: http://api.app.kllect.com/topics

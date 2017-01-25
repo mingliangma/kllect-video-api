@@ -8,6 +8,12 @@ class User {
     String email
     String uid
     Date birthdate
+    String name
+    String gender
+    String profilePicUrl
+    String city
+    String country
+
     static hasMany = [interests:Topic]
     static mapping = {
         uid index:true, indexAttributes: [unique:true, dropDups:true]
@@ -16,5 +22,10 @@ class User {
     }
     static constraints = {
         birthdate nullable: true
+        name nullable: true
+        gender nullable: true
+        profilePicUrl nullable: true
+        city nullable: true
+        country nullable: true
     }
 }
