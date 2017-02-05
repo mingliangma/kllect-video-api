@@ -1,5 +1,6 @@
 import com.kllect.Article
 
+response.contentType "application/json"
 model {
     List<Article> articles = []
     Integer articleCount

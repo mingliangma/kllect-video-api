@@ -33,7 +33,13 @@ class ArticleController {
         String tag = params.tag
         Map findParams = setParams()
 
-        def articles = Article.findAllByTags(tag, findParams)
+        def c = Article.createCriteria()
+        def articles = c.list(findParams) {
+            ne("is_corrupted", true)
+            eq("tags", tag)
+        }
+
+
         int offset = findParams.offset + findParams.max
         String nextPagePath = "articles/topic/"+tag+"?offset="+offset
         [articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath]
@@ -46,6 +52,28 @@ class ArticleController {
         int offset = params.offset?params.offset.toInteger():0
 
         return [sort: sort, order: order, max:max, offset:offset]
+    }
+
+    //When videos are unavailable or corrupted to watch, client will call this method to mark video to be corrupted.
+    def markCorruptedVideo(){
+
+        def validation = markCorruptedVideoValidation(params, request.JSON.token)
+
+        JWTPayload jwtPayload
+        if (validation instanceof KllectError){
+            KllectError error = (KllectError) validation
+            response.status= error.httpStatus
+            render(view:'error', model:[error: error.message])
+            return
+        }
+
+        String articleId = params.id
+
+        Map newDoc = ['$set': ["is_corrupted": true]]
+        Map query = ["_id": new ObjectId(articleId)]
+        Article.collection.update(query, newDoc)
+
+        render(view:'success')
     }
 
     def listVideoByRecommending(){
@@ -62,11 +90,14 @@ class ArticleController {
 
         User user = User.findByUid(uid)
 
-        List<String> tags = getInterestNamesFromUser(user)
+        def tags = getInterestNamesFromUser(user)
         Map findParams = setParams()
 
-        List<Article> articles = Article.findAllByTagsInList(tags, findParams)
-        countTags(articles)
+        def c = Article.createCriteria()
+        def articles = c.list(findParams) {
+            ne("is_corrupted", true)
+            'in'("tags", tags)
+        }
 
         int offset = findParams.offset + findParams.max
         String nextPagePath = "articles/recommending?offset="+offset+"&uid="+uid
@@ -74,11 +105,10 @@ class ArticleController {
         render(view:'listVideoByTag', model:[articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath])
     }
 
-    List<String> getInterestNamesFromUser(User user){
-        List<String> topics = new ArrayList<String>()
+    def getInterestNamesFromUser(User user){
+        def topics = []
         for (Topic topic: user.interests){
-            println "topics: "+topic.name
-            topics.add(topic.name)
+            topics.add(topic.getName())
         }
         return topics
     }
@@ -225,6 +255,24 @@ class ArticleController {
         User user = User.findByUid(jwtPayload.user_id)
         if (user == null){
             return new KllectError("The user does not exists", "", 401)
+        }
+        return jwtPayload
+    }
+
+    def markCorruptedVideoValidation(params, String token){
+        if (params.id == null){
+            return new KllectError("article id not exist", "", 400)
+        }
+
+        JWTPayload jwtPayload;
+        try {
+            jwtPayload = verifyService.verifyToken(token)
+        }catch(JsonSyntaxException e){
+            log.error("JsonSyntaxException: "+e.message)
+            return new KllectError("Token is corrupted", "", 400)
+        }catch (Exception e){
+            log.error("JsonSyntaxException: "+e.message)
+            return new KllectError(e.getMessage(), "", 401)
         }
         return jwtPayload
     }

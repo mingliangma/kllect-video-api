@@ -1,5 +1,5 @@
 import com.kllect.Topic
-
+response.contentType "application/json"
 model {
     List<Topic> topics = []
 }

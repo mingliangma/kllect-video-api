@@ -20,7 +20,8 @@ class Article {
     String category
     String publisher
     int duration
-    String[] tags;
+    String[] tags
+    boolean is_corrupted
 
     static mapping = {
         article_url index:true, indexAttributes: [unique:true, dropDups:true]
@@ -31,5 +32,6 @@ class Article {
     static constraints = {
         video_selector nullable: true
         article_base_url nullable: true
+        is_corrupted nullable: true
     }
 }

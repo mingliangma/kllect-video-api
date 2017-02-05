@@ -11,6 +11,7 @@ class UrlMappings {
         "/articles/tag/$tag"(controller: 'article', action:'listVideoByTag') //to be deprecated
         "/article/$id"(controller: 'article', action:'getArticle')
         "/article/$id/relevancy"(controller: 'article', action:'setArticleRelevancy')
+        "/article/$id/corrupt"(controller: 'article', action:'markCorruptedVideo')
         "/topics"(controller: 'interest'){
             action = [GET:"listAllTopics", POST:"saveUserInterests", PUT:"updateUserInterests"]
         }

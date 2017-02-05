@@ -1,5 +1,5 @@
 import com.kllect.Article
-
+response.contentType "application/json"
 model {
     Article article
 }
