@@ -91,7 +91,7 @@ class InterestController {
 
 
     def listAllTopics() {
-        def topics = Topic.findAll()
+        def topics = Topic.findAll(sort:"name")
         [topics: topics]
 
     }
