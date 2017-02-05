@@ -7,5 +7,5 @@ phases:
       - grails prod war
 artifacts:
   files:
-    - build/libs/Kllect_production.war
+    - build/libs/Kllect_production.war/**/*
   discard-paths: yes
