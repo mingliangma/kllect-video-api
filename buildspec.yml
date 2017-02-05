@@ -5,7 +5,8 @@ phases:
     commands:
       - echo Build completed on `date`
       - grails prod war
+      - unzip build/libs/Kllect_production.war
 artifacts:
   files:
-    - build/libs/Kllect_production.war/**/*
+    - build/libs/Kllect_production/**/*
   discard-paths: yes
