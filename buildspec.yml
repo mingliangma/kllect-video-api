@@ -8,5 +8,5 @@ phases:
       - unzip build/libs/Kllect_production.war -d Kllect_production
 artifacts:
   files:
-    - Kllect_production/**/*
+    - Kllect_production
   discard-paths: yes
