@@ -1,14 +1,11 @@
 package com.kllect.user
 
 import com.google.gson.JsonSyntaxException
-import com.kllect.DateUtil
 import com.kllect.User
 import com.kllect.auth.JWTPayload
-import grails.rest.*
-import grails.converters.*
 
 class UserController {
-    def verifyService
+    def authService
     def getUserProfile(){
         User user = User.findByUid(params.uid)
         if (user == null){
@@ -28,7 +25,7 @@ class UserController {
 
             JWTPayload jwtPayload
 
-            jwtPayload = verifyService.verifyToken(token)
+            jwtPayload = authService.verifyToken(token)
 
             User user = User.findByUid(jwtPayload.user_id)
             if (user == null) {

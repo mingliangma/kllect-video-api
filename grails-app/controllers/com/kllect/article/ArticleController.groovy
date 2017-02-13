@@ -12,7 +12,7 @@ import org.bson.types.ObjectId
 
 class ArticleController {
 
-    def verifyService
+    def authService
     def listVideoArticles() {
         def articles = Article.findAllByIs_video(true, [max: 20, sort: "parse_date", order: "desc"])
         [article: articles, articleCount: articles.size()]
@@ -243,7 +243,7 @@ class ArticleController {
 
         JWTPayload jwtPayload;
         try {
-            jwtPayload = verifyService.verifyToken(token)
+            jwtPayload = authService.verifyToken(token)
         }catch(JsonSyntaxException e){
             log.error("JsonSyntaxException: "+e.message)
             return new KllectError("Token is corrupted", "", 400)
@@ -266,7 +266,7 @@ class ArticleController {
 
         JWTPayload jwtPayload;
         try {
-            jwtPayload = verifyService.verifyToken(token)
+            jwtPayload = authService.verifyToken(token)
         }catch(JsonSyntaxException e){
             log.error("JsonSyntaxException: "+e.message)
             return new KllectError("Token is corrupted", "", 400)

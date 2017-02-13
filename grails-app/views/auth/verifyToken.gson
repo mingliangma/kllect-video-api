@@ -1,0 +1,20 @@
+import com.kllect.auth.JWTPayload
+
+response.contentType "application/json"
+model {
+    JWTPayload jwtPayload
+}
+
+json {
+    iss jwtPayload.iss
+    name jwtPayload.name
+    picture jwtPayload.picture
+    aud jwtPayload.aud
+    auth_time jwtPayload.auth_time
+    user_id jwtPayload.user_id
+    sub jwtPayload.sub
+    iat jwtPayload.iat
+    exp jwtPayload.exp
+    email jwtPayload.email
+    email_verified jwtPayload.email_verified
+}

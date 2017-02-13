@@ -18,6 +18,7 @@ class UrlMappings {
         "/user/$uid"(controller: 'user') {
             action = [GET: "getUserProfile", POST: "saveUserProfile"]
         }
+        "/token"(controller: 'auth', action:'verifyToken')
 
 
         "/"(controller: 'application', action:'index')

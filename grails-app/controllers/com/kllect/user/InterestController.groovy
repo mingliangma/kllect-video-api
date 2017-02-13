@@ -9,7 +9,7 @@ import org.bson.types.ObjectId
 
 class InterestController {
 
-    def verifyService
+    def authService
 
     def saveUserInterests() {
         String token = request.JSON.token
@@ -23,7 +23,7 @@ class InterestController {
 
         JWTPayload jwtPayload
         try {
-            jwtPayload = verifyService.verifyToken(token)
+            jwtPayload = authService.verifyToken(token)
 
             User u = User.findByUid(jwtPayload.user_id)
             if (!u) {
@@ -59,7 +59,7 @@ class InterestController {
 
         JWTPayload jwtPayload
         try {
-            jwtPayload = verifyService.verifyToken(token)
+            jwtPayload = authService.verifyToken(token)
 
             validateTopicIds(topicIds)
 
