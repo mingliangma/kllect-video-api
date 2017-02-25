@@ -24,19 +24,6 @@ class InterestController {
         JWTPayload jwtPayload
         try {
             jwtPayload = authService.verifyToken(token)
-
-            User u = User.findByUid(jwtPayload.user_id)
-            if (!u) {
-                if (birthdate) {
-                    u = saveNewUser(jwtPayload, DateUtil.parseStringToDate(birthdate))
-                } else {
-                    u = saveNewUser(jwtPayload)
-                }
-            }
-
-            addUserInterests(u, topicIds)
-            u.save(flush: true)
-            render(view:'saveUserInterests')
         }catch(JsonSyntaxException e){
             log.error("JsonSyntaxException: "+e.message)
             response.status= 400
@@ -46,10 +33,32 @@ class InterestController {
             response.status= 400
             render(view:'authFailed', model:[error: e.getMessage()])
         }catch (Exception e){
-            log.error("JsonSyntaxException: "+e.message)
+            log.error("Exception: "+e.message)
             response.status= 401
             render(view:'authFailed', model:[error: e.getMessage()])
         }
+
+        User u = User.findByUid(jwtPayload.user_id)
+        if (!u) {
+            if (birthdate) {
+                u = saveNewUser(jwtPayload, DateUtil.parseStringToDate(birthdate))
+            } else {
+                u = saveNewUser(jwtPayload)
+            }
+        }
+
+        addUserInterests(u, topicIds)
+
+        if (!u.save(flush: true)) {
+            u.errors.allErrors.each {
+                log.error(it)
+                response.status=500
+                render(view:'error', model:[error: it])
+                return
+            }
+        }
+
+        render(view:'saveUserInterests')
     }
 
     def updateUserInterests(){

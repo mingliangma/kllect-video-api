@@ -39,6 +39,7 @@ class AuthService {
 
 
     JWTPayload verifyToken(String token) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, IOException, SignatureException, JWTVerifyException{
+        println "AuthService::verifyToken(): token="+token
         JWTHeaderAndPayload jwtHeaderAndPayload = decode(token);
         String certificate = getCertificate(jwtHeaderAndPayload.jwtHeader.kid);
         return verifyToken(token, certificate);

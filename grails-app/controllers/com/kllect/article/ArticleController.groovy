@@ -3,6 +3,7 @@ package com.kllect.article
 import com.google.gson.JsonSyntaxException
 import com.kllect.Article
 import com.kllect.ArticleTopicRelevancy
+import com.kllect.HiddenStatus
 import com.kllect.Topic
 import com.kllect.User
 import com.kllect.auth.JWTPayload
@@ -30,12 +31,13 @@ class ArticleController {
     }
 
     def listVideoByTag(){
+
         String tag = params.tag
         Map findParams = setParams()
 
         def c = Article.createCriteria()
         def articles = c.list(findParams) {
-            ne("is_corrupted", true)
+            eq("hidden_status", 0)
             eq("tags", tag)
         }
 
@@ -69,7 +71,7 @@ class ArticleController {
 
         String articleId = params.id
 
-        Map newDoc = ['$set': ["is_corrupted": true]]
+        Map newDoc = ['$set': ["hidden_status": HiddenStatus.CORRUPT.status]]
         Map query = ["_id": new ObjectId(articleId)]
         Article.collection.update(query, newDoc)
 
@@ -95,7 +97,7 @@ class ArticleController {
 
         def c = Article.createCriteria()
         def articles = c.list(findParams) {
-            ne("is_corrupted", true)
+            eq("hidden_status", 0)
             'in'("tags", tags)
         }
 
@@ -182,22 +184,9 @@ class ArticleController {
 
         if(user.email == "mingliang.ma@gmail.com"){
             if (isRelevant == "false"){
-                boolean isRemoved = false;
-                for(int i; i<article.tags.length; i++){
-                    if (article.tags[i] == topicName){
-                        if(article.tags.length <=1){
-                            article.tags[i] = "others"
-                        }else{
-                            ArrayUtils.removeElement(article.tags, topicName)
-                        }
-                        article.markDirty("tags")
-                        if (!article.save(flush: true)) {
-                            article.errors.allErrors.each {
-                                log.error(it)
-                            }
-                        }
-                    }
-                }
+                Map newDoc = ['$set': ["hidden_status": HiddenStatus.UNRELATED_CATEGORY.status]]
+                Map query = ["_id": article.id]
+                Article.collection.update(query, newDoc)
             }
         }
         render(view:'success')

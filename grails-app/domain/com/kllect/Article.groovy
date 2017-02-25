@@ -1,6 +1,7 @@
 package com.kllect
 
 import org.bson.types.ObjectId
+import com.kllect.HiddenStatus
 
 class Article {
     ObjectId id
@@ -22,11 +23,13 @@ class Article {
     int duration
     String[] tags
     boolean is_corrupted
+    HiddenStatus hidden_status
 
     static mapping = {
         article_url index:true, indexAttributes: [unique:true, dropDups:true]
         title index:true, indexAttributes: [unique:true, dropDups:true]
         tags index:true
+        hidden_status index:true
     }
 
     static constraints = {
