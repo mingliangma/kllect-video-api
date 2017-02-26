@@ -16,12 +16,10 @@ json {
     youtubeUrl article.youtube_url
     description article.description
     isVideo article.is_video
-//    videoSelector article.video_selector
     imageUrl article.image_url
     interest article.extraction_method
     tags article.tags
     category article.category
     publisher article.publisher
     duration article.duration
-//    is_corrupted article.is_corrupted
 }

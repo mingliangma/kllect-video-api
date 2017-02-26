@@ -22,7 +22,6 @@ class Article {
     String publisher
     int duration
     String[] tags
-    boolean is_corrupted
     int hidden_status
 
     static mapping = {
@@ -34,7 +33,6 @@ class Article {
     static constraints = {
         video_selector nullable: true
         article_base_url nullable: true
-        is_corrupted nullable: true
         hidden_status nullable: true
     }
 
