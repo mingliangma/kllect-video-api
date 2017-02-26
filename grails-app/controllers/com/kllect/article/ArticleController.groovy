@@ -37,7 +37,7 @@ class ArticleController {
 
         def c = Article.createCriteria()
         def articles = c.list(findParams) {
-            eq("hidden_status", 0)
+            eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
             eq("tags", tag)
         }
 
@@ -97,7 +97,7 @@ class ArticleController {
 
         def c = Article.createCriteria()
         def articles = c.list(findParams) {
-            eq("hidden_status", 0)
+            eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
             'in'("tags", tags)
         }
 

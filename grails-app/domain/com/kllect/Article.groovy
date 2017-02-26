@@ -23,18 +23,22 @@ class Article {
     int duration
     String[] tags
     boolean is_corrupted
-    HiddenStatus hidden_status
+    int hidden_status
 
     static mapping = {
         article_url index:true, indexAttributes: [unique:true, dropDups:true]
         title index:true, indexAttributes: [unique:true, dropDups:true]
         tags index:true
-        hidden_status index:true
     }
 
     static constraints = {
         video_selector nullable: true
         article_base_url nullable: true
         is_corrupted nullable: true
+        hidden_status nullable: true
+    }
+
+    HiddenStatus getHiddenStatus(){
+        HiddenStatus.byStatus(hidden_status)
     }
 }

@@ -15,4 +15,8 @@ enum HiddenStatus {
     int getStatus(){
         status
     }
+
+    static HiddenStatus byStatus(int status){
+        values().find { it.status == status }
+    }
 }
