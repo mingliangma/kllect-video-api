@@ -36,10 +36,21 @@ class ArticleController {
         Map findParams = setParams()
 
         def c = Article.createCriteria()
-        def articles = c.list(findParams) {
-            eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
-            eq("tags", tag)
+        def articles
+        if (tag == "apps"){
+            articles = c.list(findParams) {
+                eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
+                eq("raw_tags", tag)
+            }
+        }else{
+            articles = c.list(findParams) {
+                eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
+                eq("tags", tag)
+            }
         }
+
+
+
 
 
         int offset = findParams.offset + findParams.max
