@@ -40,17 +40,19 @@ class ArticleController {
         if (tag == "apps"){
             articles = c.list(findParams) {
                 eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
-                eq("raw_tags", tag)
+                or {
+                    eq("raw_tags", tag)
+                    ilike("title", "% app %")
+                    ilike("title", "% apps %")
+                }
             }
         }else{
             articles = c.list(findParams) {
                 eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
                 eq("tags", tag)
             }
+
         }
-
-
-
 
 
         int offset = findParams.offset + findParams.max
