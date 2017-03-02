@@ -1,0 +1,26 @@
+import com.kllect.Article
+import org.bson.Document
+import org.bson.types.ObjectId
+
+model {
+    Document document
+}
+json {
+    id document.get("_id").toString()
+    title document.get("title")
+    siteNeme document.get("site_name")
+    parseDate document.get("parse_date")
+    publishDate document.get("publish_date")
+    taggedDate document.get("tagged_date")
+    articleUrl document.get("article_url")
+    articleBaseUrl document.get("article_base_url")
+    youtubeUrl document.get("youtube_url")
+    description document.get("description")
+    isVideo document.get("is_video")
+    imageUrl document.get("image_url")
+    interest document.get("extraction_method")
+    tags document.get("tags")
+    category document.get("category")
+    publisher document.get("publisher")
+    duration document.get("duration")
+}

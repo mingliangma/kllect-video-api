@@ -9,6 +9,7 @@ import com.kllect.User
 import com.kllect.auth.JWTPayload
 import com.kllect.auth.KllectError
 import org.apache.commons.lang3.ArrayUtils
+import org.bson.Document
 import org.bson.types.ObjectId
 
 class ArticleController {
@@ -30,14 +31,14 @@ class ArticleController {
         [article:article]
     }
 
-    def listVideoByTag(){
+    def listVideoByTag() {
 
         String tag = params.tag
         Map findParams = setParams()
 
         def c = Article.createCriteria()
         def articles
-        if (tag == "apps"){
+        if (tag == "apps") {
             articles = c.list(findParams) {
                 eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
                 or {
@@ -46,6 +47,26 @@ class ArticleController {
                     ilike("title", "% apps %")
                 }
             }
+        } else if (tag == "apple"){
+            List<Map> and = []
+            and.add([extraction_method: "youtube_channel"])
+            and.add(
+                    ['$or': [
+                            ["raw_tags.0": "apple"],
+                            [ "raw_tags.1": "apple" ],
+                            [ "raw_tags.2": "apple" ],
+                            [ "raw_tags.3": "apple" ],
+                            [ "raw_tags.4": "apple" ],
+                            [ "raw_tags.5": "apple" ]
+                    ]
+                    ]
+            )
+
+            Map query = ['$and': and
+                        ]
+
+            articles = Article.collection.find(query).limit(findParams.max).asList()
+
         }else{
             articles = c.list(findParams) {
                 eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
@@ -57,7 +78,16 @@ class ArticleController {
 
         int offset = findParams.offset + findParams.max
         String nextPagePath = "articles/topic/"+tag+"?offset="+offset
-        [articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath]
+
+
+        println articles[0] instanceof Article
+
+        if (articles.get(0) instanceof Article){
+            [articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath]
+        }else{
+            render(view:'listVideoByTagDocumentType', model:[articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath])
+        }
+
     }
 
     private Map setParams() {

@@ -1,0 +1,13 @@
+import org.bson.Document
+
+response.contentType "application/json"
+model {
+    List<Document> articles = []
+    Integer articleCount
+    String nextPagePath
+}
+json {
+    articles tmpl.document(articles)
+    articleCount articleCount
+    nextPagePath nextPagePath
+}

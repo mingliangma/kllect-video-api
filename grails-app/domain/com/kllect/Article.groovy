@@ -1,5 +1,6 @@
 package com.kllect
 
+import org.bson.Document
 import org.bson.types.ObjectId
 import com.kllect.HiddenStatus
 
@@ -34,6 +35,29 @@ class Article {
         video_selector nullable: true
         article_base_url nullable: true
         hidden_status nullable: true
+    }
+
+    Article(Document d){
+
+        id = d.get("_id")
+        title = d.get("title")
+        site_name = d.get("site_name")
+        parse_date = d.get("parse_date")
+        publish_date = d.get("publish_date")
+        tagged_date = d.get("tagged_date")
+        article_url = d.get("article_url")
+        article_base_url = d.get("article_base_url")
+        youtube_url = d.get("youtube_url")
+        description = d.get("description")
+        is_video = d.get("is_video")
+        video_selector = d.get("video_selector")
+        image_url = d.get("image_url")
+        extraction_method = d.get("extraction_method")
+        category = d.get("category")
+        publisher = d.get("publisher")
+        duration = d.get("duration")
+        tags = d.get("tags")
+        hidden_status = d.get("hidden_status")
     }
 
     HiddenStatus getHiddenStatus(){
