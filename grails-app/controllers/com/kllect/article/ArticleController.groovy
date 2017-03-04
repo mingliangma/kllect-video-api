@@ -8,8 +8,6 @@ import com.kllect.Topic
 import com.kllect.User
 import com.kllect.auth.JWTPayload
 import com.kllect.auth.KllectError
-import org.apache.commons.lang3.ArrayUtils
-import org.bson.Document
 import org.bson.types.ObjectId
 
 import java.util.regex.Pattern
@@ -90,6 +88,132 @@ class ArticleController {
 
             articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
 
+        }else if (tag == "uber"){
+            List<Map> and = []
+            and.add([extraction_method: "youtube_channel"])
+            and.add([hidden_status: HiddenStatus.NOT_HIDDEN.status])
+            and.add(
+                    ['$or': [
+                            ["raw_tags.0": Pattern.compile('^uber$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.1": Pattern.compile('^uber$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.2": Pattern.compile('^uber$', Pattern.CASE_INSENSITIVE)],
+                            ["title": Pattern.compile('.*uber.*', Pattern.CASE_INSENSITIVE)]
+                    ]
+                    ]
+            )
+            Map query = ['$and': and
+            ]
+
+            articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
+
+        }else if (tag == "spacex"){
+            List<Map> and = []
+            and.add([extraction_method: "youtube_channel"])
+            and.add([hidden_status: HiddenStatus.NOT_HIDDEN.status])
+            and.add(
+                    ['$or': [
+                            ["raw_tags.0": Pattern.compile('^spacex$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.1": Pattern.compile('^spacex$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.2": Pattern.compile('^spacex$', Pattern.CASE_INSENSITIVE)],
+                            ["title": Pattern.compile('.*spacex.*', Pattern.CASE_INSENSITIVE)]
+                    ]
+                    ]
+            )
+            Map query = ['$and': and
+            ]
+
+            articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
+
+        }else if (tag == "tesla"){
+            List<Map> and = []
+            and.add([extraction_method: "youtube_channel"])
+            and.add([hidden_status: HiddenStatus.NOT_HIDDEN.status])
+            and.add(
+                    ['$or': [
+                            ["raw_tags.0": Pattern.compile('^tesla$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.1": Pattern.compile('^tesla$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.2": Pattern.compile('^tesla$', Pattern.CASE_INSENSITIVE)],
+                            ["title": Pattern.compile('.*tesla.*', Pattern.CASE_INSENSITIVE)]
+                    ]
+                    ]
+            )
+            Map query = ['$and': and
+            ]
+
+            articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
+
+        }else if (tag == "microsoft"){
+            List<Map> and = []
+            and.add([extraction_method: "youtube_channel"])
+            and.add([hidden_status: HiddenStatus.NOT_HIDDEN.status])
+            and.add(
+                    ['$or': [
+                            ["raw_tags.0": Pattern.compile('^microsoft$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.1": Pattern.compile('^microsoft$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.2": Pattern.compile('^microsoft$', Pattern.CASE_INSENSITIVE)],
+                            ["title": Pattern.compile('.*microsoft.*', Pattern.CASE_INSENSITIVE)]
+                    ]
+                    ]
+            )
+            Map query = ['$and': and
+            ]
+
+            articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
+
+        }else if (tag == "amazon"){
+            List<Map> and = []
+            and.add([extraction_method: "youtube_channel"])
+            and.add([hidden_status: HiddenStatus.NOT_HIDDEN.status])
+            and.add(
+                    ['$or': [
+                            ["raw_tags.0": Pattern.compile('^amazon$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.1": Pattern.compile('^amazon$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.2": Pattern.compile('^amazon$', Pattern.CASE_INSENSITIVE)],
+                            ["title": Pattern.compile('.*amazon.*', Pattern.CASE_INSENSITIVE)]
+                    ]
+                    ]
+            )
+            Map query = ['$and': and
+            ]
+
+            articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
+
+        }else if (tag == "siliconvalley"){
+            List<Map> and = []
+            and.add([extraction_method: "youtube_channel"])
+            and.add([hidden_status: HiddenStatus.NOT_HIDDEN.status])
+            and.add(
+                    ['$or': [
+                            ["raw_tags.0": Pattern.compile('^Silicon Valley$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.1": Pattern.compile('^Silicon Valley$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.2": Pattern.compile('^Silicon Valley$', Pattern.CASE_INSENSITIVE)],
+                            ["title": Pattern.compile('.*Silicon Valley.*', Pattern.CASE_INSENSITIVE)]
+                    ]
+                    ]
+            )
+            Map query = ['$and': and
+            ]
+
+            articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
+
+        }else if (tag == "facebook"){
+            List<Map> and = []
+            and.add([extraction_method: "youtube_channel"])
+            and.add([hidden_status: HiddenStatus.NOT_HIDDEN.status])
+            and.add(
+                    ['$or': [
+                            ["raw_tags.0": Pattern.compile('^facebook$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.1": Pattern.compile('^facebook$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.2": Pattern.compile('^facebook$', Pattern.CASE_INSENSITIVE)],
+                            ["title": Pattern.compile('.*facebook.*', Pattern.CASE_INSENSITIVE)]
+                    ]
+                    ]
+            )
+            Map query = ['$and': and
+            ]
+
+            articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
+
         }else{
             articles = c.list(findParams) {
                 eq("hidden_status", HiddenStatus.NOT_HIDDEN.status)
@@ -107,7 +231,6 @@ class ArticleController {
         }else{
             render(view:'listVideoByTagDocumentType', model:[articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath])
         }
-
     }
 
     private Map setParams() {
