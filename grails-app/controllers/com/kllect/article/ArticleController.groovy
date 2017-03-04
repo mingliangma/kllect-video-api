@@ -65,7 +65,7 @@ class ArticleController {
             Map query = ['$and': and
                         ]
 
-            articles = Article.collection.find(query).limit(findParams.max).asList()
+            articles = Article.collection.find(query).sort(["publish_date": -1]).limit(findParams.max).asList()
 
         }else{
             articles = c.list(findParams) {
