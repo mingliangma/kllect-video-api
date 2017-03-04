@@ -12,6 +12,8 @@ import org.apache.commons.lang3.ArrayUtils
 import org.bson.Document
 import org.bson.types.ObjectId
 
+import java.util.regex.Pattern
+
 class ArticleController {
 
     def authService
@@ -50,14 +52,15 @@ class ArticleController {
         } else if (tag == "apple"){
             List<Map> and = []
             and.add([extraction_method: "youtube_channel"])
+            and.add([hidden_status: HiddenStatus.NOT_HIDDEN.status])
             and.add(
                     ['$or': [
-                            ["raw_tags.0": "apple"],
-                            [ "raw_tags.1": "apple" ],
-                            [ "raw_tags.2": "apple" ],
-                            [ "raw_tags.3": "apple" ],
-                            [ "raw_tags.4": "apple" ],
-                            [ "raw_tags.5": "apple" ]
+                            ["raw_tags.0": Pattern.compile('^apple$', Pattern.CASE_INSENSITIVE)],
+                            [ "raw_tags.1": Pattern.compile('^apple$', Pattern.CASE_INSENSITIVE) ],
+                            [ "raw_tags.2": Pattern.compile('^apple$', Pattern.CASE_INSENSITIVE) ],
+                            [ "raw_tags.3": Pattern.compile('^apple$', Pattern.CASE_INSENSITIVE) ],
+                            [ "raw_tags.4": Pattern.compile('^apple$', Pattern.CASE_INSENSITIVE) ],
+                            [ "raw_tags.5": Pattern.compile('^apple$', Pattern.CASE_INSENSITIVE) ]
                     ]
                     ]
             )
@@ -65,7 +68,27 @@ class ArticleController {
             Map query = ['$and': and
                         ]
 
-            articles = Article.collection.find(query).sort(["publish_date": -1]).limit(findParams.max).asList()
+            articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
+
+        }else if (tag == "snapchat"){
+            List<Map> and = []
+            and.add([extraction_method: "youtube_channel"])
+            and.add([hidden_status: HiddenStatus.NOT_HIDDEN.status])
+            and.add(
+                    ['$or': [
+                            ["raw_tags.0": Pattern.compile('^snapchat$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.1": Pattern.compile('^snapchat$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.2": Pattern.compile('^snapchat$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.3": Pattern.compile('^snapchat$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.4": Pattern.compile('^snapchat$', Pattern.CASE_INSENSITIVE)],
+                            ["raw_tags.5": Pattern.compile('^snapchat$', Pattern.CASE_INSENSITIVE)]
+                    ]
+                    ]
+            )
+            Map query = ['$and': and
+            ]
+
+            articles = Article.collection.find(query).skip(findParams.offset).sort(["publish_date": -1]).limit(findParams.max).asList()
 
         }else{
             articles = c.list(findParams) {
@@ -78,9 +101,6 @@ class ArticleController {
 
         int offset = findParams.offset + findParams.max
         String nextPagePath = "articles/topic/"+tag+"?offset="+offset
-
-
-        println articles[0] instanceof Article
 
         if (articles.get(0) instanceof Article){
             [articles: articles, articleCount: articles.size(), nextPagePath:nextPagePath]
